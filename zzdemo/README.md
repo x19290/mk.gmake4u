@@ -1,4 +1,4 @@
-# Authentic demo
+# In-depth demo
 
 In this directory, you can fetch two third-party projects, fix them,
 and build an executable by:
@@ -14,7 +14,7 @@ fetches:
 
 ## mk4u +fix
 
-applies small patches to the former, add small GNUmakefiles to them.
+applies small patches to the former, adds small GNUmakefiles to them.
 
 ## mk4u +all
 

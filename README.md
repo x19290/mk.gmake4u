@@ -11,7 +11,7 @@ An improved GNU make
   an example of GNUmakefile that references [4u/prologue.mk](4u/prologue.mk).  
   used by [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py).
 - [bin/0has](bin/0has)  
-  a tiny command that prints if headers (libs) are installed:
+  a tiny command that prints whether headers (libs) are installed:
     ```shell
     $ 0has cstddef "no such header" cstdlib
     cstddef:=yes
@@ -34,7 +34,7 @@ An improved GNU make
     ```
   directly callable from GNUmakefiles under this make.
 - [zzdemo](zzdemo/)  
-  authentic demo.
+  in-depth demo.
   you can:
     ```shell
     mk4u +fetch +fix +all
