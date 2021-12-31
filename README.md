@@ -4,9 +4,9 @@ An improved GNU make
 
 - [bin/mk4u](bin/mk4u)  
   exec make --include-dir=[$DIR](./) /4U=[$DIR](./) ...  
-  the make MUST be GNUmake
+  the make MUST be GNUmake.
 - [$DIR/4u/**/*.mk](4u/)  
-  pre-written GNUmakefiles
+  pre-written GNUmakefiles.
 - [mk4u/zz0/0.mk](mk4u/zz0/0.mk)  
   an example of GNUmakefile that references [4u/prologue.mk](4u/prologue.mk).  
   used by [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py).
@@ -47,4 +47,4 @@ An improved GNU make
 
   See [zzdemo/README.md](zzdemo/README.md).
 - \*\*/z[yz][0-9]*_t.py  
-  unittests
+  unittests.
