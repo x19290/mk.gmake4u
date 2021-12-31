@@ -3,7 +3,7 @@
 An improved GNU make
 
 - [bin/mk4u](bin/mk4u)  
-  exec make --include-dir=[$DIR](.) /4U=[$DIR](.) ...  
+  exec make --include-dir=[$DIR](./) /4U=[$DIR](./) ...  
   the make MUST be GNUmake
 - [$DIR/4u/**/*.mk](4u/)  
   pre-written GNUmakefiles
