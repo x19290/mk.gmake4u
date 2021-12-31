@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+
+def main():
+    from importlib import import_module
+    from pathlib import Path
+    from sys import path as pythonpath
+    __path__ = Path(__file__)
+    stem = __path__.stem
+    projectroot = __path__.resolve().parent.parent
+    pythonpath[:0] = projectroot.__str__(),
+    __main__ = import_module(r'%s.__main__' % stem)
+    __main__.main()
+
+
+if __name__ == r'__main__':
+    main()

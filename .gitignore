@@ -1,0 +1,8 @@
+/.vscode/.*
+*.tmp
+*.0[ae]tmp
+.DS_Store
+__pycache__/
+/zzdemo/.vscode/.*
+/zzdemo/id3edit/
+/zzdemo/libprinthex/

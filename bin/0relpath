@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+
+
+def main():
+    from os.path import relpath
+    from sys import argv
+    print(relpath(*argv[1:]))
+
+
+if __name__ == r'__main__':
+    main()

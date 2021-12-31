@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "has headers",
+            "type": "python",
+            "request": "launch",
+            "program": "bin/0has",
+            "args": ["--lang=c++", "cstddef", "no such header", "cstdlib"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "has libs",
+            "type": "python",
+            "request": "launch",
+            "program": "bin/0has",
+            "args": ["--libs", "c", "no such lib", "m"],
+            "justMyCode": false,
+            "console": "integratedTerminal"
+        }
+        {
+            "name": "mk4u",
+            "type": "python",
+            "request": "launch",
+            "program": "bin/mk4u",
+            "args": ["--version"],
+            "justMyCode": false,
+            "console": "integratedTerminal"
+        },
+    ]
+}

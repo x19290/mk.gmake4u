@@ -1,0 +1,44 @@
+diff --git a/encoding/crc.c b/encoding/crc.c
+index f331b91..c69a39c 100644
+--- a/encoding/crc.c
++++ b/encoding/crc.c
+@@ -1,5 +1,4 @@
+ #include <stdlib.h>
+-#include <endian.h>
+ #include <encoding/crc.h>
+ 
+ 
+diff --git a/encoding/size.c b/encoding/size.c
+index 4e0c3c1..eaa30fa 100644
+--- a/encoding/size.c
++++ b/encoding/size.c
+@@ -1,5 +1,4 @@
+ #include <errno.h> 
+-#include <endian.h>
+ #include <encoding/size.h>
+ 
+ 
+diff --git a/extheader.c b/extheader.c
+index d527a88..7c2c089 100644
+--- a/extheader.c
++++ b/extheader.c
+@@ -3,7 +3,6 @@
+ #include <stdlib.h>
+ #include <limits.h>
+ #include <unistd.h>
+-#include <endian.h>
+ #include <stdbool.h>
+ #include <encoding/size.h>
+ #include <encoding/crc.h>
+diff --git a/rawfile.c b/rawfile.c
+index 1da3e9e..6af53f5 100644
+--- a/rawfile.c
++++ b/rawfile.c
+@@ -3,7 +3,6 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
+-#include <endian.h>
+ #include <rawfile.h>
+ 
+ #ifdef DEBUG
