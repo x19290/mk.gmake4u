@@ -8,8 +8,8 @@ An improved GNU make
 - [$DIR/4u/**/*.mk](4u/)  
   pre-written GNUmakefiles
 - [mk4u/zz0/0.mk](mk4u/zz0/0.mk)  
-  an example of GNUmakefile that references [4u/prologue.mk](4u/prologue.mk)  
-  used by [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py)
+  an example of GNUmakefile that references [4u/prologue.mk](4u/prologue.mk).  
+  used by [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py).
 - [bin/0has](bin/0has)  
   a tiny command that prints if headers (libs) are installed:
     ```shell
