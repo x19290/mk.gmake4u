@@ -50,37 +50,5 @@ endif
 ??	:=$(??:c.%=%)
 ??	:=$(??:lib%=%)
 
-#{
-# macro:
-#	+project-roots := +project-root ~ +/interproject-root
-# targets:
-#	+projects: $(+project-roots)
-#	+project-root ~ +/interproject-root
-+project-roots\
-	:=$(foreach y,+ +/ +inter +/inter,$yproject-root)
-
-+projects\
-:$(+project-roots)
-
-$(+project-roots)\
-:
-	: $@
-	: $(+root)
-	:
-
-+project-root\
-:+root\
-	:=$(/.)
-+/project-root\
-:+root\
-	:=$(//.)
-+interproject-root\
-:+root\
-	:=$(...)
-+/interproject-root\
-:+root\
-	:=$(/..)
-#}
-
 +remake\
 :+clean! +all
