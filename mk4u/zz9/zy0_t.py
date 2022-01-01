@@ -1,11 +1,11 @@
 # TODO: remove the POSIX dependency
 
-from zzdemo import devnull, xcall, Smoke, TestCase, XPopen, DEVNULL, PIPE
+from mk4u.zz9 import devnull, xcall, Smoke, TestCase, XPopen, DEVNULL, PIPE
 from pathlib import Path
 from sys import path as pythonpath
-__path__ = Path(__file__).resolve().parent.with_name(r'zzdemo')
+__path__ = Path(__file__).resolve().parent.with_name(r'zz9')
 _SMOKE = __path__
-_PROJECT = _SMOKE.parent
+_PROJECT = _SMOKE.parent.parent
 pythonpath[:0] = _SMOKE.__str__(),
 
 _FEED0 = r'''
