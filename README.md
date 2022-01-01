@@ -33,7 +33,7 @@ An improved GNU make
     ..
     ```
   directly callable from GNUmakefiles under this make.
-- [zzdemo](zzdemo/)  
+- [mk4u/zz9](mk4u/zz9/)  
   in-depth demo.
   you can:
     ```shell
@@ -45,6 +45,6 @@ An improved GNU make
     ```
   here.
 
-  See [zzdemo/README.md](zzdemo/README.md).
+  See [mk4u/zz9/README.md](mk4u/zz9/README.md).
 - \*\*/z[yz][0-9]*_t.py  
   unittests.
