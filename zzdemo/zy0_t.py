@@ -7,68 +7,6 @@ _SMOKE = __path__
 _PROJECT = _SMOKE.parent
 pythonpath[:0] = _SMOKE.__str__(),
 
-_FEED0 = r'''
-cd id3edit
-mkdir -p dig/dig
-cd dig/dig
-
-mk4u --no-print-directory -C . -f ../../GNUmakefile +projects
-mk4u --no-print-directory -C .. -f ../GNUmakefile +projects
-mk4u --no-print-directory -C ../.. -f GNUmakefile +projects
-mk4u --no-print-directory -C ../../.. -f %(hub)s/GNUmakefile +projects
-'''
-
-_EXPECTED0 = r'''
-: +project-root
-: ../..
-:
-: +/project-root
-: %(cwd)s/%(hub)s
-:
-: +interproject-root
-: ../../..
-:
-: +/interproject-root
-: %(cwd)s
-:
-: +project-root
-: ..
-:
-: +/project-root
-: %(cwd)s/%(hub)s
-:
-: +interproject-root
-: ../..
-:
-: +/interproject-root
-: %(cwd)s
-:
-: +project-root
-: .
-:
-: +/project-root
-: %(cwd)s/%(hub)s
-:
-: +interproject-root
-: ..
-:
-: +/interproject-root
-: %(cwd)s
-:
-: +project-root
-: %(hub)s
-:
-: +/project-root
-: %(cwd)s/%(hub)s
-:
-: +interproject-root
-: .
-:
-: +/interproject-root
-: %(cwd)s
-:
-'''[1:]
-
 _FEED1 = r'''
 set -eu
 
@@ -185,9 +123,6 @@ class T0(Smoke, TestCase):
             oobj.close()
             nothing = p.stdout.read()[:-1].decode(r'UTF-8')
             cls.nothing_forclean = nothing[6:]  # drop "^mk4u: "
-
-    def test0(self):
-        self.smoke(_FEED0, _EXPECTED0)
 
     def test1(self):
         self.smoke(_FEED1, _EXPECTED1)
