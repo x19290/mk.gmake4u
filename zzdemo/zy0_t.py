@@ -1,5 +1,4 @@
-from mk4u.popen import xcall, XPopen
-from mk4u.test import devnull, Smoke, TestCase, DEVNULL, PIPE
+from zzdemo import devnull, xcall, Smoke, TestCase, XPopen, DEVNULL, PIPE
 from pathlib import Path
 from sys import path as pythonpath
 __path__ = Path(__file__).resolve().parent.with_name(r'zzdemo')
