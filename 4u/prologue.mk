@@ -13,7 +13,8 @@ pwd	:=$(shell pwd)
 #	/*	absolute sometimes
 
 #{
-# project root:
+# project root.
+# relative to the first GNUmakefile, not $(PWD):
 #	/.	relative mostly
 #	//.	absolute always
 ./	:=$(dir $(firstword $(MAKEFILE_LIST)))
@@ -28,7 +29,8 @@ endif
 #}
 
 #{
-# interproject root
+# interproject root.
+# relative to the first GNUmakefile, not $(PWD):
 #	... relative mostly
 #	/.. absolute always
 ...	:=$(shell 0relpath $(./)..)
