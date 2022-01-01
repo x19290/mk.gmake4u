@@ -17,6 +17,5 @@
         "posix",
         "pythonpath",
         "xcall",
-        "zzdemo",
     ],
 }

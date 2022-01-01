@@ -35,7 +35,5 @@
         "unittests",
         "xcall",
         "xpopen",
-        "zzdemo",
-        "zztest",
     ],
 }
