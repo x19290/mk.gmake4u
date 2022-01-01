@@ -21,6 +21,7 @@ from unittest import TestCase
     Path,
     copyfile, copyfileobj,
     call, check_call, Popen, DEVNULL, PIPE,
+    platform,
     TestCase,
 )  # to avoid "not used" warnings
 
