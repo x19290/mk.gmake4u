@@ -7,7 +7,7 @@ _SMOKE = __path__
 _PROJECT = _SMOKE.parent
 pythonpath[:0] = _SMOKE.__str__(),
 
-_FEED1 = r'''
+_FEED0 = r'''
 set -eu
 
 cd id3edit
@@ -24,7 +24,7 @@ mk4u --no-print-directory -C ../../.. -f %(hub)s/GNUmakefile +clean!
 mk4u --no-print-directory -C ../../.. -f %(lib)s/GNUmakefile +clean! # different from above!
 '''[1:]
 
-_EXPECTED1 = r'''
+_EXPECTED0 = r'''
 %(mk4u)s -C../../../%(lib)s +clean!
 mk4u[1]: %(nothing_forclean)s
 gcc --std=gnu99 -Wno-multichar -g -c -I../.. -I../../../%(lib)s --include=endian%(endianfix)s.h -o ../../crc32.o ../../crc32.c
@@ -124,5 +124,5 @@ class T0(Smoke, TestCase):
             nothing = p.stdout.read()[:-1].decode(r'UTF-8')
             cls.nothing_forclean = nothing[6:]  # drop "^mk4u: "
 
-    def test1(self):
-        self.smoke(_FEED1, _EXPECTED1)
+    def test0(self):
+        self.smoke(_FEED0, _EXPECTED0)
