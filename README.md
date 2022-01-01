@@ -35,7 +35,7 @@ An improved GNU make
     ..
     ```
   directly callable from GNUmakefiles under [bin/mk4u](bin/mk4u).
-- [mk4u/zz9](mk4u/zz9/)  
+- [mk4u/zz9/](mk4u/zz9/)  
   in-depth demo.
   you can:
     ```shell
@@ -47,7 +47,7 @@ An improved GNU make
     ```
   here.
 
-- [mk4u/zz9/0fix](mk4u/zz9/0fix/)  
+- [mk4u/zz9/0fix/](mk4u/zz9/0fix/)  
   There are good examples of GNUmakefile and its fragment under this dir.  
   You should know that:  
   [.../id3edit/0cp/GNUmakefile](mk4u/zz9/0fix/id3edit/0cp/GNUmakefile) and
