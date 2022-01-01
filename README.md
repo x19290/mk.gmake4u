@@ -18,8 +18,8 @@ An improved GNU make
     cstdlib:=yes
 
     $ 0has --libs c "no such lib" m
-    -c:=yes
-    -m:=yes
+    -lc:=yes
+    -lm:=yes
     ```
   directly callable from GNUmakefiles under this make.
 - [bin/0relpath](bin/0relpath)  
