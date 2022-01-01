@@ -3,14 +3,14 @@
 An improved GNU make
 
 - [bin/mk4u](bin/mk4u)  
-  exec make --include-dir=[$MK](mk/) /MK=[$MK](mk/) ...  
-  the make MUST be GNUmake.
+  `exec make --include-dir=[$MK](mk/) /MK=[$MK](mk/) ...`  
+  The make MUST be GNUmake.
 - [$MK/4u/**/*.mk](mk/4u/)  
-  pre-written GNUmakefiles.
-- [mk4u/zz0/0.mk](mk4u/zz0/0.mk)  
-  an example of GNUmakefile that references
+  pre-written GNUmakefiles
+- [mk4u/zz0/0.mk](mk4u/zz0/0.mk) [mk4u/zz0/a/b/0.mk](mk4u/zz0/a/b/0.mk)  
+  These files are examples of GNUmakefile that reference
   [$MK/4u/prologue.mk](mk/4u/prologue.mk).  
-  used by [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py).
+  [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py) uses them.
 - [bin/0has](bin/0has)  
   a tiny command that prints whether headers (libs) are installed:
     ```shell
