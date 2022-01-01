@@ -1,17 +1,18 @@
 def main(argv=None):
     r'''
-    exec make --include-dir=$DIR /4U=$DIR ...
+    exec make --include-dir=$MK /MK=$MK ...
 
-    $DIR is derived from __file__ and can be referenced as $(/4U) in makefiles.
+    $DIR is derived from __file__ and can be referenced as $(/MK) in makefiles.
     '''
     from os import access, environ, execvp, pathsep as colon, X_OK
     from pathlib import Path
     if argv is None:
         from sys import argv
-    __path__ = Path(__file__).resolve().parent.parent  # $DIR
+    __path__ = Path(__file__).resolve().parent.parent
     bin = __path__ / r'bin'
-    foryou = r'--include-dir=%s' % __path__, r'/4U=%s' % __path__
-    argv = (argv[0], *foryou, *argv[1:])
+    mk = __path__ / r'mk'
+    mk = r'--include-dir=%s' % mk, r'/MK=%s' % mk
+    argv = (argv[0], *mk, *argv[1:])
 
     origlist = pathlist = environ[r'PATH'].split(colon)
 

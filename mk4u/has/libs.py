@@ -6,7 +6,7 @@ def libs(libs, search=r'', lang=None):
     from pathlib import Path
     from subprocess import call, DEVNULL
     __path__ = Path(__file__).resolve().parent
-    c = __path__.parent.with_name(r'4u') / r'c' / r'0.c'
+    c = __path__.parent.with_name(r'mk') / r'4u' / r'c' / r'0.c'
     devnull, c  # to avoid "not used" warnings
     for y in libs:
         y = r'-l%s' % y

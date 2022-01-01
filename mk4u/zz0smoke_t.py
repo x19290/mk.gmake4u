@@ -15,35 +15,35 @@ _EXPECTED01 = r'''
 '''[1:]
 
 _EXPECTED10 = r'''
-: %(proj)s
+: %(proj)s/mk
 : %(proj)s/%(pkg)s
 : %(proj)s/%(pkg)s/zz0
 : =.
 '''[1:]
 
 _EXPECTED11 = r'''
-: %(proj)s
+: %(proj)s/mk
 : %(proj)s/%(pkg)s
 : %(proj)s/%(pkg)s/zz0
 : ../=..
 '''[1:]
 
 _EXPECTED12 = r'''
-: %(proj)s
+: %(proj)s/mk
 : %(proj)s/%(pkg)s/zz0/a
 : %(proj)s/%(pkg)s/zz0/a/b
 : b/=b
 '''[1:]
 
 _EXPECTED13 = r'''
-: %(proj)s
+: %(proj)s/mk
 : %(proj)s/%(pkg)s
 : %(proj)s/%(pkg)s/zz0
 : ../../=../..
 '''[1:]
 
 _EXPECTED14 = r'''
-: %(proj)s
+: %(proj)s/mk
 : %(proj)s/%(pkg)s/zz0/a
 : %(proj)s/%(pkg)s/zz0/a/b
 : =.
