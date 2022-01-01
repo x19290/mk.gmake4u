@@ -1,15 +1,16 @@
-# GMake for You
+# GMake For You
 
 An improved GNU make
 
 - [bin/mk4u](bin/mk4u)  
-  `exec make --include-dir=[$MK](mk/) /MK=[$MK](mk/) ...`  
-  The make MUST be GNUmake.
-- [$MK/4u/**/*.mk](mk/4u/)  
-  pre-written GNUmakefiles
+  `exec make --include-dir=$MK /MK=$MK ...`  
+  `$MK` is the absolute path of [mk](mk/).  
+  `make` MUST be GNU make.
+- [mk/4u/**/*.mk](mk/4u/)  
+  pre-written GNUmakefile fragments
 - [mk4u/zz0/0.mk](mk4u/zz0/0.mk) [mk4u/zz0/a/b/0.mk](mk4u/zz0/a/b/0.mk)  
   These files are examples of GNUmakefile that reference
-  [$MK/4u/prologue.mk](mk/4u/prologue.mk).  
+  [mk/4u/prologue.mk](mk/4u/prologue.mk).  
   [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py) uses them.
 - [bin/0has](bin/0has)  
   a tiny command that prints whether headers (libs) are installed:
@@ -22,7 +23,7 @@ An improved GNU make
     -lc:=yes
     -lm:=yes
     ```
-  directly callable from GNUmakefiles under this make.
+  directly callable from GNUmakefiles under [bin/mk4u](bin/mk4u).
 - [bin/0relpath](bin/0relpath)  
   a tiny command that prints relative path of given one:
     ```shell
@@ -33,7 +34,7 @@ An improved GNU make
     $ 0relpath /usr
     ..
     ```
-  directly callable from GNUmakefiles under this make.
+  directly callable from GNUmakefiles under [bin/mk4u](bin/mk4u).
 - [mk4u/zz9](mk4u/zz9/)  
   in-depth demo.
   you can:
@@ -45,6 +46,13 @@ An improved GNU make
     mk4u
     ```
   here.
+
+- [mk4u/zz9/0fix](mk4u/zz9/0fix/)  
+  There are good examples of GNUmakefile and its fragment under this dir.  
+  You should know that:  
+  [.../id3edit/0cp/GNUmakefile](mk4u/zz9/0fix/id3edit/0cp/GNUmakefile) and
+  [.../libprinthex/0cp/GNUmakefile](mk4u/zz9/0fix/libprinthex/0cp/GNUmakefile)
+  are extremely short.
 
   See [mk4u/zz9/README.md](mk4u/zz9/README.md).
 - \*\*/z[yz][0-9]*_t.py  
