@@ -1,3 +1,5 @@
+# TODO: remove the POSIX dependency
+
 from zzdemo import devnull, xcall, Smoke, TestCase, XPopen, DEVNULL, PIPE
 from pathlib import Path
 from sys import path as pythonpath
