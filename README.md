@@ -35,7 +35,7 @@ An improved GNU make
     ..
     ```
   directly callable from GNUmakefiles under [bin/mk4u](bin/mk4u).
-- [mk4u/zz9/](mk4u/zz9/)  
+- [mk4u/zz9indepth/](mk4u/zz9indepth/)  
   in-depth demo.
   you can:
     ```shell
@@ -47,13 +47,17 @@ An improved GNU make
     ```
   here.
 
-- [mk4u/zz9/0fix/](mk4u/zz9/0fix/)  
+- [mk4u/zz9indepth/0fix/](mk4u/zz9indepth/0fix/)  
   There are good examples of GNUmakefile and its fragment under this dir.  
   You should know that:  
-  [.../id3edit/0cp/GNUmakefile](mk4u/zz9/0fix/id3edit/0cp/GNUmakefile) and
-  [.../libprinthex/0cp/GNUmakefile](mk4u/zz9/0fix/libprinthex/0cp/GNUmakefile)
+  [.../id3edit/0cp/GNUmakefile](
+    mk4u/zz9indepth/0fix/id3edit/0cp/GNUmakefile
+  ) and
+  [.../libprinthex/0cp/GNUmakefile](
+    mk4u/zz9indepth/0fix/libprinthex/0cp/GNUmakefile
+  )
   are extremely short.
 
-  See [mk4u/zz9/README.md](mk4u/zz9/README.md).
+  See [mk4u/zz9indepth/README.md](mk4u/zz9indepth/README.md).
 - \*\*/z[yz][0-9]*_t.py  
   unittests.
