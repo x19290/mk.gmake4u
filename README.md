@@ -3,8 +3,9 @@
 An improved GNU make
 
 - [bin/mk4u](bin/mk4u)  
-  `exec make --include-dir=$MK /MK=$MK ...`  
-  `$MK` is the absolute path of [mk](mk/).  
+  It does `exec make --include-dir=$MK /MK=$MK ...`  
+  `$MK` is the absolute path of [mk/](mk/)
+  derived from [mk4u/_\_main__.py](mk4u/__main__.py).  
   `make` MUST be GNU make.
 - [mk/4u/**/*.mk](mk/4u/)  
   pre-written GNUmakefile fragments
