@@ -13,7 +13,8 @@ zz0/
 		b/
 			0.mk
 
-Both 0.mk look like:
+**/0.mk look like:
+----
 include 4u/prologue.mk
 
 +all\
@@ -22,6 +23,7 @@ include 4u/prologue.mk
         : $(/..)
         : $(//.)
         : $(./)=$(/.)
+----
 !
 
 function you-can/run/this-script/on-any-dir ()

@@ -12,7 +12,8 @@ An improved GNU make
 - [mk4u/zz0/0.mk](mk4u/zz0/0.mk) [mk4u/zz0/a/b/0.mk](mk4u/zz0/a/b/0.mk)  
   These files are examples of GNUmakefile that reference
   [mk/4u/prologue.mk](mk/4u/prologue.mk).  
-  [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py) uses them.
+  [mk4u/zz0smoke_t.py](mk4u/zz0smoke_t.py) and
+  [mk4u/zz0.bash](mk4u/zz0.bash) use them.
 - [bin/0has](bin/0has)  
   a tiny command that prints whether headers (libs) are installed:
     ```shell
