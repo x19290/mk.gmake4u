@@ -67,3 +67,6 @@ An improved GNU make
 
 - **/*_slowtest.py  
   unittests (slow)
+
+- [mk4u/PORTS.md](mk4u/PORTS.md)  
+  to overcome the weakness of the python's package system
