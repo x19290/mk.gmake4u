@@ -61,5 +61,9 @@ An improved GNU make
   are extremely short.
 
   See [mk4u/zz9indepth/README.md](mk4u/zz9indepth/README.md).
-- \*\*/z[yz][0-9]*_t.py  
-  unittests.
+
+- **/*_test.py  
+  unittests
+
+- **/*_slowtest.py  
+  unittests (slow)
