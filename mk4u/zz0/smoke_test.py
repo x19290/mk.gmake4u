@@ -1,48 +1,37 @@
 # POSIX specific
-from ..has.__main__ import main as has
 from ..__main__ import main as make
 from ..test import curdir, eq_, relpath, Path, StringIO, TestCase
 from os import close, dup, dup2, fork, pipe, read, wait
 
-_EXPECTED00 = r'''
-cstddef:=yes
-cstdlib:=yes
-'''[1:]
-
-_EXPECTED01 = r'''
--lc:=yes
--lm:=yes
-'''[1:]
-
-_EXPECTED10 = r'''
+_EXPECTED0 = r'''
 : %(proj)s/mk
 : %(proj)s/%(pkg)s
 : %(proj)s/%(pkg)s/zz0
 : =.
 '''[1:]
 
-_EXPECTED11 = r'''
+_EXPECTED1 = r'''
 : %(proj)s/mk
 : %(proj)s/%(pkg)s
 : %(proj)s/%(pkg)s/zz0
 : ../=..
 '''[1:]
 
-_EXPECTED12 = r'''
+_EXPECTED2 = r'''
 : %(proj)s/mk
 : %(proj)s/%(pkg)s/zz0/a
 : %(proj)s/%(pkg)s/zz0/a/b
 : b/=b
 '''[1:]
 
-_EXPECTED13 = r'''
+_EXPECTED3 = r'''
 : %(proj)s/mk
 : %(proj)s/%(pkg)s
 : %(proj)s/%(pkg)s/zz0
 : ../../=../..
 '''[1:]
 
-_EXPECTED14 = r'''
+_EXPECTED4 = r'''
 : %(proj)s/mk
 : %(proj)s/%(pkg)s/zz0/a
 : %(proj)s/%(pkg)s/zz0/a/b
@@ -50,21 +39,7 @@ _EXPECTED14 = r'''
 '''[1:]
 
 
-class T0has(TestCase):
-    def _test(self, feed, expected):
-        b = StringIO()
-        has(feed.split(r','), stdout=b)
-        actual = b.getvalue()
-        eq_(expected, actual)
-
-    def test0headers(self):
-        self._test(r'<>,-xc++,cstddef,no such header,cstdlib', _EXPECTED00)
-
-    def test1libs(self):
-        self._test(r'<>,--libs,c,no such lib,m', _EXPECTED01)
-
-
-class T1mk(TestCase):
+class T0(TestCase):
     pkg = Path(__file__).resolve().parent.parent
     proj, pkg, infix = pkg.parent, pkg.name, relpath(pkg, Path.cwd())
     infix = r'' if infix == curdir else r'%s/' % infix
@@ -95,16 +70,16 @@ class T1mk(TestCase):
         eq_(expected, actual)
 
     def test0(self):
-        self._test(r'<> -C%(infix)szz0 -f0.mk', _EXPECTED10)
+        self._test(r'<> -C%(infix)szz0 -f0.mk', _EXPECTED0)
 
     def test1(self):
-        self._test(r'<> -C%(infix)szz0/a -f../0.mk', _EXPECTED11)
+        self._test(r'<> -C%(infix)szz0/a -f../0.mk', _EXPECTED1)
 
     def test2(self):
-        self._test(r'<> -C%(infix)szz0/a -fb/0.mk', _EXPECTED12)
+        self._test(r'<> -C%(infix)szz0/a -fb/0.mk', _EXPECTED2)
 
     def test3(self):
-        self._test(r'<> -C%(infix)szz0/a/b -f../../0.mk', _EXPECTED13)
+        self._test(r'<> -C%(infix)szz0/a/b -f../../0.mk', _EXPECTED3)
 
     def test4(self):
-        self._test(r'<> -C%(infix)szz0/a/b -f0.mk', _EXPECTED14)
+        self._test(r'<> -C%(infix)szz0/a/b -f0.mk', _EXPECTED4)
