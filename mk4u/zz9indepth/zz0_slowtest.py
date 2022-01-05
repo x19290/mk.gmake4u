@@ -1,8 +1,10 @@
 # TODO: remove the POSIX dependency
 
 from mk4u.zz9indepth import (
-    devnull, xcall, Smoke, TestCase, XPopen, DEVNULL, PIPE,
+    devnull, xcall, Smoke, StringIO, TestCase, XPopen, DEVNULL, PIPE,
 )
+from mk4u.osredirect import redirect, STDOUT_BIT
+from os import execvpe
 from pathlib import Path
 from sys import path as pythonpath
 __path__ = Path(__file__).resolve().parent.with_name(r'zz9indepth')
@@ -118,8 +120,13 @@ class T0(Smoke, TestCase):
     def setUpClass(cls):
         super(T0, cls).setUpClass()
         kw = cls.kwargs
-        with XPopen(r'0has --libs iconv', stdout=PIPE, **kw) as p:
-            cls.liconv = r' -liconv' if p.stdout.read() else r''
+        env = kw[r'env']
+        # with XPopen(r'0has --libs iconv', stdout=PIPE, **kw) as p:
+        b = StringIO()
+        with redirect(STDOUT_BIT, b) as iswriter:
+            if iswriter:
+                execvpe(r'/bin/sh', (r'sh', r'-c', r'0has --libs iconv'), env)
+        cls.liconv = r' -liconv' if b.getvalue() else r''
         with XPopen(r'mk4u -f - +clean!', stdin=PIPE, stdout=PIPE, **kw) as p:
             oobj = p.stdin
             oobj.write(br'+clean!:' b'\n')
