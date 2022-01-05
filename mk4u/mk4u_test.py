@@ -1,6 +1,6 @@
 # POSIX specific
-from ..__main__ import main as make
-from ..test import curdir, eq_, relpath, Path, StringIO, TestCase
+from .__main__ import main as make
+from .test import curdir, eq_, relpath, Path, StringIO, TestCase
 from os import close, dup, dup2, fork, pipe, read, wait
 
 _EXPECTED0 = r'''
