@@ -1,6 +1,9 @@
 from mk4u.test import (
     colon, environ, eq_, devnull, xcall, TestCase, XPopen, DEVNULL, PIPE,
+    StringIO,
 )
+from mk4u.osredirect import redirect, STDERR_BIT, STDOUT_BIT
+from os import chdir, execvpe
 
 devnull, TestCase  # to avoid "not used" warnings
 
@@ -23,13 +26,18 @@ class Smoke:
             feed = tuple(y % ns for y in feed)
         expected %= ns
         kwargs = self.kwargs
+        stdout, stderr = StringIO(), StringIO()
         xcall(self.enter, stderr=DEVNULL, stdout=DEVNULL, **kwargs)
         try:
-            with XPopen(feed, stderr=PIPE, stdout=PIPE, **kwargs) as p:
-                smoke = p.stderr.read().decode(r'UTF-8')
-                if smoke:
-                    raise AssertionError(smoke)
-                actual = p.stdout.read().decode(r'UTF-8')
+            # with XPopen(feed, stderr=PIPE, stdout=PIPE, **kwargs) as p:
+            with redirect(STDOUT_BIT | STDERR_BIT, stdout, stderr) as iswriter:
+                if iswriter:
+                    chdir(self.cwd)
+                    execvpe(r'/bin/sh', (r'sh', r'-c', feed), kwargs[r'env'])
         finally:
             xcall(self.leave, stderr=DEVNULL, stdout=DEVNULL, **kwargs)
+        actual = stdout.getvalue()
+        smoke = stderr.getvalue()
+        if smoke:
+            raise AssertionError(smoke)
         eq_(expected, actual)
