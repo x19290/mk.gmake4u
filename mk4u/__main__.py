@@ -9,8 +9,7 @@ def main(argv=None):
     from pathlib import Path
     if argv is None:
         from sys import argv
-    mk = r'--include-dir=%s' % MK, r'/MK=%s' % MK
-    argv = (argv[0], *mk, *argv[1:])
+    argv = (argv[0], r'--include-dir=%s' % MK, r'/MK=%s' % MK, *argv[1:])
 
     origlist = pathlist = environ[r'PATH'].split(colon)
 
