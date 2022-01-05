@@ -17,7 +17,7 @@ An improved GNU make
 - [bin/0has](bin/0has)  
   a tiny command that prints whether headers (libs) are installed:
     ```shell
-    $ 0has cstddef "no such header" cstdlib
+    $ 0has --lang=c++ cstddef "no such header" cstdlib
     cstddef:=yes
     cstdlib:=yes
 
