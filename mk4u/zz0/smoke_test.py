@@ -1,7 +1,7 @@
 # POSIX specific
-from .has.__main__ import main as has
-from .__main__ import main as make
-from .test import curdir, eq_, relpath, Path, StringIO, TestCase
+from ..has.__main__ import main as has
+from ..__main__ import main as make
+from ..test import curdir, eq_, relpath, Path, StringIO, TestCase
 from os import close, dup, dup2, fork, pipe, read, wait
 
 _EXPECTED00 = r'''
@@ -65,7 +65,7 @@ class T0has(TestCase):
 
 
 class T1mk(TestCase):
-    pkg = Path(__file__).resolve().parent
+    pkg = Path(__file__).resolve().parent.parent
     proj, pkg, infix = pkg.parent, pkg.name, relpath(pkg, Path.cwd())
     infix = r'' if infix == curdir else r'%s/' % infix
 
