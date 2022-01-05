@@ -40,7 +40,7 @@ _EXPECTED4 = r'''
 
 
 class T0(TestCase):
-    pkg = Path(__file__).resolve().parent.parent
+    pkg = Path(__file__).resolve().parent
     proj, pkg, infix = pkg.parent, pkg.name, relpath(pkg, Path.cwd())
     infix = r'' if infix == curdir else r'%s/' % infix
 
