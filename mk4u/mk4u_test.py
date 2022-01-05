@@ -1,7 +1,6 @@
 # POSIX specific
 from .__main__ import main as make
 from .test import curdir, eq_, relpath, Path, StringIO, TestCase
-from os import close, dup, dup2, fork, pipe, read, wait
 
 _EXPECTED0 = r'''
 : %(proj)s/mk
@@ -45,28 +44,12 @@ class T0(TestCase):
     infix = r'' if infix == curdir else r'%s/' % infix
 
     def _test(self, feed, expected):
-        # testing `make` is not so easy because:
-        # - it has nothing like `stdout=` parameter
-        # - it `exec`s
         ns = self.__class__.__dict__
         feed %= ns
         expected %= ns
-        outfd = 1
-        saved = dup(outfd)
-        try:
-            r, w = pipe()
-            dup2(w, outfd)
-            close(w)
-            pid = fork()
-            if pid == 0:
-                make(feed.split())
-                raise AssertionError
-        finally:
-            dup2(saved, outfd)
-        close(saved)
-        wait()
-        enough = 8192
-        actual = read(r, enough).decode(r'UTF-8')
+        b = StringIO()
+        make(feed.split(), stdout=b)
+        actual = b.getvalue()
         eq_(expected, actual)
 
     def test0(self):

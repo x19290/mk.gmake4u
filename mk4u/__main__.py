@@ -1,14 +1,19 @@
-def main(argv=None):
+def main(argv=None, stdout=None, stderr=None):
     r'''
     exec make --include-dir=$MK /MK=$MK ...
 
     $DIR is derived from __file__ and can be referenced as $(/MK) in makefiles.
     '''
     from . import BIN, MK
+    from .osredirect import redirect, STDERR_BIT, STDOUT_BIT
     from os import access, environ, execvp, pathsep as colon, X_OK
     from pathlib import Path
     if argv is None:
         from sys import argv
+    if stdout is None:
+        from sys import stdout
+    if stderr is None:
+        from sys import stderr
     argv = (argv[0], r'--include-dir=%s' % MK, r'/MK=%s' % MK, *argv[1:])
 
     origlist = pathlist = environ[r'PATH'].split(colon)
@@ -50,7 +55,9 @@ def main(argv=None):
 
     if BIN not in origlist:
         environ[r'PATH'] = colon.join(y.__str__() for y in origlist + [BIN])
-    execvp(executable, argv)
+    with redirect(STDOUT_BIT | STDERR_BIT, stdout, stderr) as iswriter:
+        if iswriter:
+            execvp(executable, argv)
 
 
 if __name__ == r'__main__':
