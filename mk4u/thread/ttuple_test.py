@@ -8,7 +8,7 @@ class T0(TestCase):
     def test0(self):
         r, w = pipe()
         actual = []
-        feed = br'abcd'
+        feed = br"abcd"
         expected = list(feed)
 
         class ProdCons(ThreadTuple):
