@@ -10,10 +10,18 @@ def main(argv=None, stdout=None, stderr=None):
     from pathlib import Path
     if argv is None:
         from sys import argv
+    fdbits = 0
+    oobjs = []
     if stdout is None:
         from sys import stdout
+    else:
+        fdbits |= STDOUT_BIT
+        oobjs.append(stdout)
     if stderr is None:
         from sys import stderr
+    else:
+        fdbits |= STDERR_BIT
+        oobjs.append(stderr)
     argv = (argv[0], r'--include-dir=%s' % MK, r'/MK=%s' % MK, *argv[1:])
 
     origlist = pathlist = environ[r'PATH'].split(colon)
@@ -55,7 +63,7 @@ def main(argv=None, stdout=None, stderr=None):
 
     if BIN not in origlist:
         environ[r'PATH'] = colon.join(y.__str__() for y in origlist + [BIN])
-    with redirect(STDOUT_BIT | STDERR_BIT, stdout, stderr) as iswriter:
+    with redirect(fdbits, *oobjs) as iswriter:
         if iswriter:
             execvp(executable, argv)
 
