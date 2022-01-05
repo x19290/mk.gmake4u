@@ -4,14 +4,12 @@ def main(argv=None):
 
     $DIR is derived from __file__ and can be referenced as $(/MK) in makefiles.
     '''
+    from . import BIN, MK
     from os import access, environ, execvp, pathsep as colon, X_OK
     from pathlib import Path
     if argv is None:
         from sys import argv
-    __path__ = Path(__file__).resolve().parent.parent
-    bin = __path__ / r'bin'
-    mk = __path__ / r'mk'
-    mk = r'--include-dir=%s' % mk, r'/MK=%s' % mk
+    mk = r'--include-dir=%s' % MK, r'/MK=%s' % MK
     argv = (argv[0], *mk, *argv[1:])
 
     origlist = pathlist = environ[r'PATH'].split(colon)
@@ -51,8 +49,8 @@ def main(argv=None):
     if not executable:
         raise ValueError(stem)
 
-    if bin not in origlist:
-        environ[r'PATH'] = colon.join(y.__str__() for y in origlist + [bin])
+    if BIN not in origlist:
+        environ[r'PATH'] = colon.join(y.__str__() for y in origlist + [BIN])
     execvp(executable, argv)
 
 
