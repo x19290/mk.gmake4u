@@ -121,7 +121,6 @@ class T0(Smoke, TestCase):
         super(T0, cls).setUpClass()
         kw = cls.kwargs
         env = kw[r'env']
-        # with XPopen(r'0has --libs iconv', stdout=PIPE, **kw) as p:
         b = StringIO()
         with redirect(STDOUT_BIT, b) as iswriter:
             if iswriter:
