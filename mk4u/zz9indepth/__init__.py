@@ -2,9 +2,7 @@ from mk4u.test import (
     colon, environ, eq_, devnull, xcall, TestCase, XPopen, DEVNULL, PIPE,
 )
 
-(
-    devnull, TestCase,
-)  # to avoid "not used" warnings
+devnull, TestCase  # to avoid "not used" warnings
 
 
 class Smoke:
