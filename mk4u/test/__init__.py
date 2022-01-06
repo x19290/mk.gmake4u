@@ -1,4 +1,4 @@
-from ..popen import xcall, XPopen
+from ..popen import xcall
 from nose.tools import raises
 from contextlib import redirect_stderr, redirect_stdout
 from inspect import stack
@@ -12,6 +12,7 @@ from sys import platform
 from unittest import TestCase
 
 (
+    xcall,
     raises,
     redirect_stderr, redirect_stdout,
     stack,

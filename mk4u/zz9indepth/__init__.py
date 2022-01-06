@@ -1,6 +1,5 @@
 from mk4u.test import (
-    colon, environ, eq_, devnull, xcall, TestCase, XPopen, DEVNULL, PIPE,
-    StringIO,
+    colon, environ, eq_, devnull, xcall, StringIO, TestCase, DEVNULL,
 )
 from mk4u.osredirect import redirect, STDERR_BIT, STDOUT_BIT
 from os import chdir, execvpe
@@ -29,7 +28,6 @@ class Smoke:
         stdout, stderr = StringIO(), StringIO()
         xcall(self.enter, stderr=DEVNULL, stdout=DEVNULL, **kwargs)
         try:
-            # with XPopen(feed, stderr=PIPE, stdout=PIPE, **kwargs) as p:
             with redirect(STDOUT_BIT | STDERR_BIT, stdout, stderr) as iswriter:
                 if iswriter:
                     chdir(self.cwd)
