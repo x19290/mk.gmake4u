@@ -62,7 +62,7 @@ class Redirect(dict):
         return self
 
     def __exit__(self, *_, **__):
-        from ..thread import ConcurrentReader
+        from .stdiopump import StdioPump
         from os import close, wait, _exit, WEXITSTATUS
 
         if self.iswriter:
@@ -88,7 +88,7 @@ class Redirect(dict):
                     yield r
                     close(w)
 
-        ConcurrentReader(fds(), self.oobjs, stdin=self.stdin).join()
+        StdioPump(fds(), self.oobjs, stdin=self.stdin).join()
         status = WEXITSTATUS(wait()[1])
         if status != 0:
             raise ValueError(status)
