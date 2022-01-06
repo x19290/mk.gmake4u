@@ -1,10 +1,8 @@
 # TODO: remove the POSIX dependency
 
-from mk4u.zz9indepth import (
-    devnull, xcall, Smoke, StringIO, TestCase, XPopen, DEVNULL, PIPE,
-)
+from mk4u.zz9indepth import devnull, xcall, Smoke, StringIO, TestCase, DEVNULL
 from mk4u.osredirect import redirect, STDOUT_BIT
-from os import execvpe
+from os import chdir, execvpe
 from pathlib import Path
 from sys import path as pythonpath
 __path__ = Path(__file__).resolve().parent.with_name(r'zz9indepth')
@@ -126,12 +124,15 @@ class T0(Smoke, TestCase):
             if iswriter:
                 execvpe(r'/bin/sh', (r'sh', r'-c', r'0has --libs iconv'), env)
         cls.liconv = r' -liconv' if b.getvalue() else r''
-        with XPopen(r'mk4u -f - +clean!', stdin=PIPE, stdout=PIPE, **kw) as p:
-            oobj = p.stdin
-            oobj.write(br'+clean!:' b'\n')
-            oobj.close()
-            nothing = p.stdout.read()[:-1].decode(r'UTF-8')
-            cls.nothing_forclean = nothing[6:]  # drop "^mk4u: "
+        stdin = br'+clean!:' b'\n',
+        b = StringIO()
+        argv = r'mk4u -f - +clean!'.split()
+        with redirect(STDOUT_BIT, b, stdin=stdin) as iswriter:
+            if iswriter:
+                chdir(cls.cwd)
+                execvpe(argv[0], argv, kw[r'env'])
+        nothing = b.getvalue().rstrip()
+        cls.nothing_forclean = nothing[6:]  # drop "^mk4u: "
 
     def test0(self):
         self.smoke(_FEED0, _EXPECTED0)
