@@ -43,7 +43,7 @@ class _Test:
 
 class T0bytes(_Test, TestCase):
     io = BytesIO
-    ab = br"ab"
+    ab = br'ab'
 
     @staticmethod
     def getbytes(b):
