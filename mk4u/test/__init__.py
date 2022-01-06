@@ -26,6 +26,14 @@ from unittest import TestCase
     TestCase,
 )  # to avoid "not used" warnings
 
+def __testpat():
+    from re import compile
+
+    return compile(r'_.*test\.py$')
+
+
+_TESTPAT = __testpat()
+
 
 def eq_(expected, actual, msg=None):
     if actual == expected:
@@ -46,7 +54,7 @@ def eq_(expected, actual, msg=None):
     for i in range(1, 10):
         deeper = sp[i]
         filename, method = deeper[1], deeper[3]
-        if filename.endswith(r'_t.py'):
+        if _TESTPAT.search(filename):
             break
     def multilined(*g):
         try:
