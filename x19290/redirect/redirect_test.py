@@ -1,6 +1,6 @@
 from . import redirect, STDIN, STDERR_BIT, STDERR, STDOUT, STDOUT_BIT
 from io import BytesIO, StringIO
-from os import close, dup2, fork, pipe, read, wait, write, _exit
+from os import close, dup2, fork, pipe, read, write, _exit
 from nose.tools import eq_
 from unittest import TestCase
 
