@@ -1,6 +1,6 @@
 # POSIX specific
 from .__main__ import main as make
-from .test import curdir, eq_, relpath, Path, StringIO, TestCase
+from ..test import curdir, eq_, relpath, Path, StringIO, TestCase
 
 _EXPECTED0 = r'''
 : %(proj)s/mk
@@ -40,8 +40,8 @@ _EXPECTED4 = r'''
 
 class T0(TestCase):
     pkg = Path(__file__).resolve().parent
-    proj, pkg, infix = pkg.parent, pkg.name, relpath(pkg, Path.cwd())
-    infix = r'' if infix == curdir else r'%s/' % infix
+    proj, pkg = pkg.parent.parent, relpath(pkg, Path.cwd())
+    infix = r'' if pkg == curdir else r'%s/' % pkg
 
     def _test(self, feed, expected):
         ns = self.__class__.__dict__

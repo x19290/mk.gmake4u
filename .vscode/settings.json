@@ -2,7 +2,7 @@
     "python.pythonPath": "python3",
     "python.testing.unittestArgs": [
         "--verbose",
-        "-p", "*_test.py"
+        "-p", "*_slowtest.py"
     ],
     "python.testing.unittestEnabled": true,
 

@@ -1,7 +1,7 @@
-from mk4u.test import (
+from x19290.test import (
     colon, environ, eq_, devnull, xcall, StringIO, TestCase, DEVNULL,
 )
-from mk4u.osredirect import redirect, STDERR_BIT, STDOUT_BIT
+from x19290.redirect import redirect, STDERR_BIT, STDOUT_BIT
 from os import chdir, execvpe
 
 devnull, TestCase  # to avoid "not used" warnings

@@ -5,7 +5,7 @@ def main(argv=None, stdout=None, stderr=None):
     $DIR is derived from __file__ and can be referenced as $(/MK) in makefiles.
     '''
     from . import BIN, MK
-    from .osredirect import redirect, STDERR_BIT, STDOUT_BIT
+    from ..redirect import redirect, STDERR_BIT, STDOUT_BIT
     from os import access, environ, execvp, pathsep as colon, X_OK
     from pathlib import Path
     if argv is None:

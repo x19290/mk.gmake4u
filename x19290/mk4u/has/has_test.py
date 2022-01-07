@@ -1,5 +1,5 @@
 from .__main__ import main as has
-from ..test import eq_, StringIO, TestCase
+from ...test import eq_, StringIO, TestCase
 
 _EXPECTED0 = r'''
 cstddef:=yes

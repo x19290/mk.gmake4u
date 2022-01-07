@@ -20,7 +20,8 @@ def main():
                 return y  # use it as the pkgname
 
     pythonpath[:0] = __path__.parent.__str__(),
-    __main__ = import_module(r'%s.%s.__main__' % (pkg(), stem))
+    mod = r'x19290.%s.%s.__main__' % (pkg(), stem)
+    __main__ = import_module(mod)
     __main__.main()
 
 

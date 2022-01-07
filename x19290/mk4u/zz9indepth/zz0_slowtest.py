@@ -1,13 +1,15 @@
 # TODO: remove the POSIX dependency
 
-from mk4u.zz9indepth import devnull, xcall, Smoke, StringIO, TestCase, DEVNULL
-from mk4u.osredirect import redirect, STDOUT_BIT
+from x19290.mk4u.zz9indepth import (
+    devnull, xcall, Smoke, StringIO, TestCase, DEVNULL,
+)
+from x19290.redirect import redirect, STDOUT_BIT
 from os import chdir, execvpe
 from pathlib import Path
 from sys import path as pythonpath
 __path__ = Path(__file__).resolve().parent.with_name(r'zz9indepth')
 _SMOKE = __path__
-_PROJECT = _SMOKE.parent.parent
+_PROJECT = _SMOKE.parent.parent.parent
 pythonpath[:0] = _SMOKE.__str__(),
 
 _FEED0 = r'''
@@ -122,7 +124,7 @@ class T0(Smoke, TestCase):
         b = StringIO()
         with redirect(STDOUT_BIT, b) as iswriter:
             if iswriter:
-                execvpe(r'/bin/sh', (r'sh', r'-c', r'0has --libs iconv'), env)
+                execvpe(r'0has', (r'0has', r'--libs', r'iconv'), env)
         cls.liconv = r' -liconv' if b.getvalue() else r''
         stdin = br'+clean!:' b'\n',
         b = StringIO()
