@@ -6,11 +6,10 @@ def main():
     from pathlib import Path
     from sys import path as pythonpath
     __path__ = Path(__file__)
-    stem = __path__.stem
     projectroot = __path__.resolve().parent.parent
     pythonpath[:0] = projectroot.__str__(),
-    __main__ = import_module(r'x19290.%s.__main__' % stem)
-    __main__.main()
+    from x19290.make.__main__ import main
+    main()
 
 
 if __name__ == r'__main__':

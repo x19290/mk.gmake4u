@@ -1,6 +1,6 @@
 # TODO: remove the POSIX dependency
 
-from x19290.mk4u.zz9indepth import (
+from x19290.make.zz9indepth import (
     devnull, xcall, Smoke, StringIO, TestCase, DEVNULL,
 )
 from x19290.redirect import redirect, STDOUT_BIT

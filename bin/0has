@@ -3,7 +3,7 @@
 
 def main():
     r'''
-    call ./~.has.__main__.main()
+    call x19290.make.has.__main__.main()
     if this command is called ./bin/0has
     '''
     from importlib import import_module
@@ -12,15 +12,8 @@ def main():
     __path__ = Path(__file__)
     stem = __path__.stem[1:]
     __path__ = __path__.resolve().parent
-
-    def pkg():
-        for y in __path__.iterdir():
-            y = y.name
-            if y[:1].isalpha():
-                return y  # use it as the pkgname
-
     pythonpath[:0] = __path__.parent.__str__(),
-    mod = r'x19290.%s.%s.__main__' % (pkg(), stem)
+    mod = r'x19290.make.%s.__main__' % stem
     __main__ = import_module(mod)
     __main__.main()
 
