@@ -3,7 +3,7 @@
 from x19290.make.zz9indepth import (
     devnull, xcall, Smoke, StringIO, TestCase, DEVNULL,
 )
-from x19290.redirect import redirect, STDOUT_BIT
+from x19290.redirect import redirect
 from os import chdir, execvpe
 from pathlib import Path
 from sys import path as pythonpath
@@ -122,14 +122,14 @@ class T0(Smoke, TestCase):
         kw = cls.kwargs
         env = kw[r'env']
         b = StringIO()
-        with redirect(STDOUT_BIT, b) as iswriter:
+        with redirect(stdout=b) as iswriter:
             if iswriter:
                 execvpe(r'0has', (r'0has', r'--libs', r'iconv'), env)
         cls.liconv = r' -liconv' if b.getvalue() else r''
         stdin = br'+clean!:' b'\n',
         b = StringIO()
         argv = r'mk4u -f - +clean!'.split()
-        with redirect(STDOUT_BIT, b, stdin=stdin) as iswriter:
+        with redirect(stdin=stdin, stdout=b) as iswriter:
             if iswriter:
                 chdir(cls.cwd)
                 execvpe(argv[0], argv, kw[r'env'])

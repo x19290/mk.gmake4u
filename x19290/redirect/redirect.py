@@ -1,94 +1,95 @@
 from contextlib import contextmanager
 
-STDOUT_BIT, STDERR_BIT = 1, 2
 STDIN, STDOUT, STDERR = range(3)
-STDFDS = STDIN, STDOUT, STDERR
 
 
 @contextmanager
-def redirect(fdbits: int, *oobjs, stdin=None):
+def redirect(stdin=None, stdout=None, stderr=None):
     try:
-        r = Redirect(fdbits, *oobjs, stdin=stdin).__enter__()
-        yield r.iswriter
+        r = Redirect(stdin, stdout, stderr).__enter__()
+        yield r.ischild
     finally:
         r.__exit__()
 
 
-class Redirect(dict):
-    def __init__(self, fdbits: int, *oobjs, stdin=None):
-        from ..null.nullio import NULL_OUT
+class Redirect(tuple):
+    def __new__(cls, stdin=None, stdout=None, stderr=None):
         from os import pipe
 
-        def fds():
-            self.stdin = stdin
-            if stdin:
-                yield STDIN
-            bit = STDOUT_BIT
-            for fd in STDOUT, STDERR:
-                if fdbits & bit:
-                    yield fd
-                bit <<= 1
+        def contents():
+            for y in stdin, stdout, stderr:
+                yield None if y is None else (pipe(), y)
 
-        fds = tuple(fds())
-        oobjs += (NULL_OUT,) * (fds.__len__() - oobjs.__len__())
-        self.oobjs = oobjs
-        super().__init__({y: pipe() for y in fds})
+        return super().__new__(cls, contents())
 
     def __enter__(self):
         from os import close, dup2, fork
 
-        self.iswriter = iswriter = fork() == 0
-        if iswriter:
-            if self.stdin:
-                r0, w0 = self[0]
+        self.ischild = ischild = fork() == 0
+        if ischild:
+            stdin = self[0]
+            if stdin:
+                pipe = stdin[0]
                 # {A
-                dup2(r0, 0)
+                dup2(pipe[0], 0)
                 # }
                 # {B
-                for y, (r, w) in self.items():
-                    if y != STDIN:
-                        dup2(w, y)
+                for fd, route in enumerate(self[1:], start=1):
+                    if route:
+                        pipe = route[0]
+                        dup2(pipe[1], fd)
                 # }
                 # {C
-                for r, w in self.values():
-                    close(r)
-                    close(w)
+                for route in self:
+                    if route:
+                        pipe = route[0]
+                        close(pipe[0])
+                        close(pipe[1])
                 # }
             else:
-                for y, (r, w) in self.items():
-                    dup2(w, y)
-                    close(w)
-                    close(r)
+                for fd, route in enumerate(self):
+                    if route:
+                        r, w = route[0]
+                        dup2(w, fd)
+                        close(w)
+                        close(r)
         return self
 
     def __exit__(self, *_, **__):
-        from .stdiopump import StdioPump
+        from ..iopump import IOPump
         from os import close, wait, _exit, WEXITSTATUS
 
-        if self.iswriter:
+        if self.ischild:
             _exit(0)
 
-        def fds():
-            if self.stdin:
+        def how():
+            stdin = self[0]
+            if stdin:
+                pipe, iobj = stdin
                 # {E
-                r0, w0 = self[0]
-                yield w0
+                r0, w0 = pipe
+                yield True, w0, iobj
                 close(r0)
                 # }
                 # {F
-                for y in sorted(self.keys()):
-                    r, w = self[y]
-                    if y != STDIN:
-                        close(w)
-                        yield r
+                for route in self[1:]:
+                    if route is None:
+                        continue
+                    pipe, oobj = route
+                    r, w = pipe
+                    close(w)
+                    yield False, r, oobj
                 # }
             else:
-                for y in sorted(self.keys()):
-                    r, w = self[y]
-                    yield r
+                for route in self[1:]:
+                    if route is None:
+                        continue
+                    pipe, oobj = route
+                    r, w = pipe
                     close(w)
+                    yield False, r, oobj
 
-        StdioPump(fds(), self.oobjs, stdin=self.stdin).join()
+        IOPump(*how()).join()
         status = WEXITSTATUS(wait()[1])
         if status != 0:
             raise ValueError(status)

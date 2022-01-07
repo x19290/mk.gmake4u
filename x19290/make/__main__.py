@@ -5,23 +5,11 @@ def main(argv=None, stdout=None, stderr=None):
     $DIR is derived from __file__ and can be referenced as $(/MK) in makefiles.
     '''
     from . import BIN, MK
-    from ..redirect import redirect, STDERR_BIT, STDOUT_BIT
+    from ..redirect import redirect
     from os import access, environ, execvp, pathsep as colon, X_OK
     from pathlib import Path
     if argv is None:
         from sys import argv
-    fdbits = 0
-    oobjs = []
-    if stdout is None:
-        from sys import stdout
-    else:
-        fdbits |= STDOUT_BIT
-        oobjs.append(stdout)
-    if stderr is None:
-        from sys import stderr
-    else:
-        fdbits |= STDERR_BIT
-        oobjs.append(stderr)
     argv = (argv[0], r'--include-dir=%s' % MK, r'/MK=%s' % MK, *argv[1:])
 
     origlist = pathlist = environ[r'PATH'].split(colon)
@@ -63,7 +51,7 @@ def main(argv=None, stdout=None, stderr=None):
 
     if BIN not in origlist:
         environ[r'PATH'] = colon.join(y.__str__() for y in origlist + [BIN])
-    with redirect(fdbits, *oobjs) as iswriter:
+    with redirect(stdout=stdout, stderr=stderr) as iswriter:
         if iswriter:
             execvp(executable, argv)
 

@@ -1,4 +1,4 @@
-from .stdiopump import StdioPump
+from .iopump import IOPump
 from ..thread.zz import (
     ThreadTuple, Thread,
     BytesIO, StringIO,
@@ -33,7 +33,7 @@ class _Test:
 
         a, b = self.a, self.b
         writers = Writers()
-        readers = StdioPump((ar, br), (a, b))
+        readers = IOPump((False, ar, a), (False, br, b))
         writers.join()
         readers.join()
 

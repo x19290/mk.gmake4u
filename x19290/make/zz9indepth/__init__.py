@@ -1,7 +1,7 @@
 from x19290.test import (
     colon, environ, eq_, devnull, xcall, StringIO, TestCase, DEVNULL,
 )
-from x19290.redirect import redirect, STDERR_BIT, STDOUT_BIT
+from x19290.redirect import redirect
 from os import chdir, execvpe
 
 devnull, TestCase  # to avoid "not used" warnings
@@ -28,7 +28,7 @@ class Smoke:
         stdout, stderr = StringIO(), StringIO()
         xcall(self.enter, stderr=DEVNULL, stdout=DEVNULL, **kwargs)
         try:
-            with redirect(STDOUT_BIT | STDERR_BIT, stdout, stderr) as iswriter:
+            with redirect(stdout=stdout, stderr=stderr) as iswriter:
                 if iswriter:
                     chdir(self.cwd)
                     execvpe(r'/bin/sh', (r'sh', r'-c', feed), kwargs[r'env'])
