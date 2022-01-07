@@ -17,7 +17,7 @@ class StdioPump(ThreadTuple):
                 return b
         else:
             def adapt(b):
-                from ..xcodecs.utf8 import utf8decode
+                from ..codecs.utf8 import utf8decode
                 return utf8decode(b)
 
         def doread(fd, oobj):
@@ -31,7 +31,7 @@ class StdioPump(ThreadTuple):
             from os import close, write
             w = fds.__next__()
             def dowrite(stdin=stdin):
-                from ..xcodecs.utf8 import utf8encode as adapt
+                from ..codecs.utf8 import utf8encode as adapt
                 stdin = stdin.__iter__()
                 try:
                     chunk = stdin.__next__()
