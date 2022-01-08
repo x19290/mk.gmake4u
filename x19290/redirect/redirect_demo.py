@@ -2,26 +2,26 @@
 
 
 def main():
-    print(_main())
+    print(redirect_demo())
 
 
-def _main(argv=None):
+def redirect_demo(argv=None):
     r'''
-    To do the following doctest (>>> _main...), run:
-    `python3 -m doctest redirectdemo.py`
+    To do the following doctest (>>> redirect_demo...), run:
+    `python3 -m doctest redirect_demo.py`
 
     There should be no output.
 
-    >>> _main(r'<>'.split())
+    >>> redirect_demo(r'<>'.split())
     'AB ab'
 
-    >>> _main(r'<> --bin-in'.split())
+    >>> redirect_demo(r'<> --bin-in'.split())
     'AB ab'
 
-    >>> _main(r'<> --bin-out'.split())
+    >>> redirect_demo(r'<> --bin-out'.split())
     b'AB ab'
 
-    >>> _main(r'<> --bin-out --bin-in'.split())
+    >>> redirect_demo(r'<> --bin-out --bin-in'.split())
     b'AB ab'
     '''
 
@@ -51,10 +51,18 @@ def _main(argv=None):
         from io import StringIO as MemIO
         sep = r' '
 
+    # `stdout`, `stderr` can be any writable `fileobj`
+    # Data are auto-decoded by a single decoder: `utf8decode` or `identity`
+    # It means that `BytesIO() as stdout, StringIO() as stderr` is not allowed.
     with MemIO() as stdout, MemIO() as stderr:
+        # `stdin` can be anything that yields `str` or `bytes`.
+        # Data are auto-encoded by a single encoder: `utf8encode` or `identity`
+        # It means that, stdin = b'~', '~' is not allowed
         stdin = feed,
         with redirect(stdin, stdout, stderr) as ischild:
-            if ischild:
+            # pass stdin,... stderr in this order or use std~=...
+            # stdin,... stderr may be None meaning "no io"
+            if ischild:  # this `if` is required
                 data = read(STDIN, 8192)
                 write(STDOUT, data.upper())
                 write(STDERR, data.lower())
