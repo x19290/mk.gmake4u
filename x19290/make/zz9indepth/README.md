@@ -24,7 +24,7 @@ builds libprinthex/libprinthex.a and id3edit/id3edit (recursive make.)
 
 The outputs of the make can be tested by:
 ```shell
-PYTHONPATH=.. python3 -m unittest discover -p 'zy[0-9]*_t.py'
+PYTHONPATH=.. python3 -m unittest discover -p 'zz[0-9]*_slowtest.py'
 ```
 
 Such tests are excluded from settings.json because they are slow.
