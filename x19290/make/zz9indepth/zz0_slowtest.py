@@ -6,11 +6,9 @@ from x19290.make.zz9indepth import (
 from x19290.redirect import redirect
 from os import chdir, execvpe
 from pathlib import Path
-from sys import path as pythonpath
 __path__ = Path(__file__).resolve().parent.with_name(r'zz9indepth')
 _SMOKE = __path__
 _PROJECT = _SMOKE.parent.parent.parent
-pythonpath[:0] = _SMOKE.__str__(),
 
 _FEED0 = r'''
 set -eu
