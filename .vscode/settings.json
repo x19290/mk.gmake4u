@@ -38,6 +38,7 @@
         "posix",
         "pythonpath",
         "relpath",
+        "slowtest",
         "testid",
         "ttuple",
         "unittests",
