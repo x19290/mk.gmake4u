@@ -7,8 +7,7 @@ from x19290.make import MK
 from x19290.redirect import redirect
 from os import chdir, execvpe
 from pathlib import Path
-__path__ = Path(__file__).resolve().parent.with_name(r'zz9indepth')
-_SMOKE = __path__
+_SMOKE = Path(__file__).resolve().parent.with_name(r'zz9indepth')
 _PROJECT = MK.parent
 
 _FEED0 = r'''
