@@ -3,12 +3,13 @@
 from x19290.make.zz9indepth import (
     devnull, xcall, Smoke, StringIO, TestCase, DEVNULL,
 )
+from x19290.make import MK
 from x19290.redirect import redirect
 from os import chdir, execvpe
 from pathlib import Path
 __path__ = Path(__file__).resolve().parent.with_name(r'zz9indepth')
 _SMOKE = __path__
-_PROJECT = _SMOKE.parent.parent.parent
+_PROJECT = MK.parent
 
 _FEED0 = r'''
 set -eu
